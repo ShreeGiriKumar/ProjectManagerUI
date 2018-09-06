@@ -1,0 +1,30 @@
+.projectBox
+{
+    background-color: gainsboro !important;  
+    border:1px solid lightgrey;
+    border-radius: 5px;
+    width:65%; 
+    margin:5px;
+}
+.priorityBox
+{
+    height: auto;
+    min-height: 50px;
+    background-color: gainsboro !important;  
+    border:1px solid lightgrey;
+    border-radius: 5px;    
+}
+.priorityBoxSpacing
+{
+    width:10%;
+    margin:5px;
+}
+.buttonSpacing
+{
+    width:20%;
+    margin:5px;
+}
+.top-buffer
+{
+margin-top: 10px;
+}

@@ -1,0 +1,136 @@
+<div class="form-group">
+  <div class="col-sm-5">
+    <label for="Task" class="control-label col-sm-2">Project:</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" id="projectTitle" [(ngModel)]="projectTitle" disabled/>
+    </div>
+    <div class="col-md-1">
+      <button type="button" class="col-md-offset-1 btn btn-primary" data-toggle="modal" data-target="#myProjectModal">Search</button>
+    </div>
+  </div>
+
+  <div class="col-sm-7">
+    <label for="ParentTask" class="control-label col-sm-2">Sort Task:</label>
+    <div class="col-sm-10">
+      <button type="button" class="btn btn-primary" (click)="sortProjects('StartDate')">Start Date</button>
+      <button type="button" class="col-md-offset-1 btn btn-primary" (click)="sortProjects('EndDate')">End Date</button>
+      <button type="button" class="col-md-offset-1 btn btn-primary" (click)="sortProjects('Priority')">Priority</button>
+      <button type="button" class="col-md-offset-1 btn btn-primary" (click)="sortProjects('IsTaskEnded')">Completed</button>
+    </div>
+  </div>
+</div>
+
+<div class="row"></div>
+<hr/>
+
+<div *ngIf="errMsgToShow">
+  <h4>
+    <label class="label label-danger">No Tasks found!</label>
+  </h4>
+</div>
+
+<div *ngIf="filteredTasks != null" class="table-responsive">
+<table class="table table-striped table-condensed">
+  <tbody>    
+    <tr *ngFor="let task of filteredTasks | sorting:path:order">
+      <td>
+        <div>
+          <b>Task</b>
+        </div>
+        <div class="divTaskDisplay">
+          {{task.TaskTitle}}
+        </div>
+      </td>
+      <td>
+        <div>
+          <b>Parent</b>
+        </div>
+        <div class="divTaskDisplay">
+          {{task.TaskTitle == task.ParentTaskTitle ? '' : task.ParentTaskTitle}}
+        </div>
+      </td>
+      <td>
+        <div>
+          <b>Priority</b>
+        </div>
+        <label class="labelPosition">{{task.Priority}}</label>
+      </td>
+      <td>
+        <div>
+          <b>Start</b>
+        </div>
+        <label class="labelPosition">{{task.StartDate | date:'shortDate'}}</label>
+      </td>
+      <td>
+        <div>
+          <b>End</b>
+        </div>
+        <label class="labelPosition">{{task.EndDate | date:'shortDate'}}</label>
+      </td>
+      <td>
+        <a routerLink="/EditTask/{{task.TaskId}}/{{task.TaskTitle == task.ParentTaskTitle ? 1 : 0}}">
+          <button class="btn btn-primary editBtnPos" [disabled]="task.IsTaskEnded">
+            Edit</button>
+        </a>
+        <input type="button" class="btn btn-success btn-sm endBtnPos" value="End Task" (click)="endTask(task.TaskId)" [disabled]="task.IsTaskEnded || task.TaskTitle == task.ParentTaskTitle">
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- Modal to Search Project -->
+<div class="modal fade" id="myProjectModal" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Search Project</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <div class="col-sm-6">
+            <label for="Task" class="control-label col-sm-2">Search:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="filterProject" [(ngModel)]="filterProjectText" (blur)="filterProjects()" required/>
+            </div>
+          </div>
+          <div class="row"></div>
+          <hr/>
+          <div>
+            <table class="table table-striped">
+              <thead>
+                <td>
+                  <label>Title</label>
+                </td>
+                <td>
+                  <label>Start Date</label>
+                </td>
+                <td>
+                  <label>End Date</label>
+                </td>
+                <td>
+                  <label>Priority</label>
+                </td>
+                <td></td>
+              </thead>
+              <tbody>
+                <tr *ngFor="let project of filteredProjects">
+                  <td>{{project.ProjectTitle}}</td>
+                  <td>{{project.StartDate | date:'shortDate'}} </td>
+                  <td>{{project.EndDate | date:'shortDate'}}</td>
+                  <td>{{project.Priority}} </td>
+                  <td>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" (click)="selectedProject(project.ProjectId,project.ProjectTitle)">Select</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

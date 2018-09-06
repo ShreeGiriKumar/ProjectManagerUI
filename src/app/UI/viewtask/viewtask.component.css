@@ -1,0 +1,21 @@
+.divTaskDisplay{
+    height:100px;
+    width:300px;
+    border:1px solid lightgrey;
+    background-color:lightgrey;
+    border-radius: 5px;
+    border-block-end-color: burlywood;
+}
+.labelPosition{
+    padding-top:40px;
+}
+.editBtnPos{
+    margin-top:50px;
+}
+.endBtnPos{
+    margin-left:20px;
+    margin-top:50px;
+}
+.wellHeight{
+    height:180px;
+}

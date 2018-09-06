@@ -1,0 +1,76 @@
+<fieldset>
+  <legend>Edit Task</legend>
+  <div class="col-md-10">
+    <form class="form-horizontal" ngNativeValidate #myForm="ngForm">
+      <div class="form-group">
+        <label class="label label-danger label-sm">{{errValidationMsg}}</label>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-2" for="Project">Project:</label>
+        <div class="col-md-5">
+          <input type="text" id="Project" name="Project" [(ngModel)]="projectTitle" class="form-control col-md-4" placeholder="Search Project"
+            disabled>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-2" for="TaskName">Task:</label>
+        <div class="col-md-5">
+          <input type="text" id="TaskName" name="TaskName" [(ngModel)]="taskName" class="form-control col-md-4" placeholder="Enter Task Detail"
+            required>
+        </div>
+      </div>
+      <div class="form-group">
+        <span class="col-md-2"></span>
+        <div class="col-sm-2">
+          <h4>
+            <input type="checkbox" name="parentChk" (change)="checkValue($event)" (value)="parentChk" [(ngModel)]="parentChk" disabled/>Parent Task</h4>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-2" for="TaskPriority">Priority:</label>
+        <div class="col-md-5">
+          <input type="text" id="TaskPriority" name="TaskPriority" [(ngModel)]="priority" class="form-control col-md-4" type="range"
+            min="0" max="30" step="1" (change)="show_value()" [disabled]="parentTaskChk">
+          <span class="label label-warning pull-right">{{sliderVal}}</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-2" for="ParentTask">Parent Task:</label>
+        <div class="col-md-5">
+          <select class="form-control" [disabled]="parentTaskChk" [(ngModel)]="selectedElement.ParentTaskId"
+            name="ParentTask">
+            <option *ngFor="let parentTask of parentTasks" [ngValue]="parentTask.ParentTaskId">
+              {{parentTask.ParentTaskTitle}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-2" for="StartDate">Start Date:</label>
+        <div class="col-md-5">
+          <input type="text" id="StartDate" name="startDate" [(ngModel)]="startDate" class="form-control col-md-4" type="date" required
+            [disabled]="parentTaskChk">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-2" for="EndDate">End Date:</label>
+        <div class="col-md-5">
+          <input type="text" id="EndDate" name="EndDate" [(ngModel)]="endDate" class="form-control col-md-4" type="date" required [disabled]="parentTaskChk">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-2" for="User">User:</label>
+        <div class="col-md-5">
+          <input type="text" id="User" name="User" [(ngModel)]="user" class="form-control col-md-4" disabled>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-6">
+          <input type="submit" value="Update Task" id="btnUpdate" class="col-md-offset-5 btn btn-primary" (click)="updateTask()" [disabled]="!myForm.form.valid"
+          />
+          <input type="button" value="Reset" id="btnReset" class="col-md-offset-1 btn btn-secondary" (click)="resetFields()" />
+        </div>
+      </div>
+    </form>
+  </div>
+</fieldset>
