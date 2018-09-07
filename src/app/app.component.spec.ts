@@ -13,6 +13,7 @@ import { ProjectComponent } from 'src/app/UI/project/project.component';
 import { MenuComponent } from 'src/app/ui/menu/menu.component';
 import { FormsModule } from '@angular/forms';
 import {Router, Routes} from "@angular/router";
+import { SortingPipe } from './pipe/sorting.pipe';
 
 const routes: Routes = [
   { path: 'AddTask', component: AddComponent },
@@ -36,7 +37,10 @@ describe('AppComponent', () => {
         AddComponent,
         ViewComponent,
         EditComponent,
-        MenuComponent
+        MenuComponent,
+        UserComponent,
+        ProjectComponent,
+        SortingPipe
       ],
       imports: [
         RouterTestingModule.withRoutes(routes),
@@ -69,20 +73,34 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('li:nth-child(n+1) a').textContent).toContain('Add Task');
-    expect(compiled.querySelector('li:nth-child(n+2) a').textContent).toContain('View Task');
+    expect(compiled.querySelector('li:nth-child(n+1) a').textContent).toContain('Add Project');
+    expect(compiled.querySelector('li:nth-child(n+2) a').textContent).toContain('Add Task');
+    expect(compiled.querySelector('li:nth-child(n+3) a').textContent).toContain('Add User');
+    expect(compiled.querySelector('li:nth-child(n+4) a').textContent).toContain('View Task');
   }));
 
-  it('navigate to "" redirects you to /Add', fakeAsync(() => {
+  it('navigate to "" redirects you to /Add Task', fakeAsync(() => {
     router.navigate(['']);
     tick(50);
-    expect(location.path()).toBe('/Add');
+    expect(location.path()).toBe('/AddTask');
   }));
 
-  it('navigate to "" redirects you to /View', fakeAsync(() => {
-    router.navigate(['/View']);
+  it('navigate to ViewTask redirects you to /View', fakeAsync(() => {
+    router.navigate(['/ViewTask']);
     tick(50);
-    expect(location.path()).toBe('/View');
+    expect(location.path()).toBe('/ViewTask');
+  }));
+
+  it('navigate to User redirects you to /User', fakeAsync(() => {
+    router.navigate(['/User']);
+    tick(50);
+    expect(location.path()).toBe('/User');
+  }));
+
+  it('navigate to Project redirects you to /Project', fakeAsync(() => {
+    router.navigate(['/Project']);
+    tick(50);
+    expect(location.path()).toBe('/Project');
   }));
 
 });

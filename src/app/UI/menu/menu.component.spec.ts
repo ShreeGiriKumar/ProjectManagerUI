@@ -25,9 +25,13 @@ describe('MenuComponent', () => {
 
   it('should have correct href url in menu',() => {
     let href1 = fixture.debugElement.nativeElement.querySelector('li:nth-child(n+1) a').getAttribute('routerLink');
-    expect(href1).toEqual('/Add');
+    expect(href1).toEqual('/Project');
     let href2 = fixture.debugElement.nativeElement.querySelector('li:nth-child(n+2) a').getAttribute('routerLink')
-    expect(href2).toEqual('/View');
+    expect(href2).toEqual('/AddTask');
+    let href3 = fixture.debugElement.nativeElement.querySelector('li:nth-child(n+3) a').getAttribute('routerLink')
+    expect(href3).toEqual('/User');
+    let href4 = fixture.debugElement.nativeElement.querySelector('li:nth-child(n+4) a').getAttribute('routerLink')
+    expect(href4).toEqual('/ViewTask');
   });
 
 });
