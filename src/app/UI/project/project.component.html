@@ -17,7 +17,7 @@
         <span class="col-md-2"></span>
         <div class="col-sm-2">
           <h6>
-            <input type="checkbox" name="DateDefCheck" [(ngModel)]="dateDefCheck" (change)="checkValue($event)" />Set Start-End Date</h6>
+            <input type="checkbox" id="DateDefCheck" name="DateDefCheck" [(ngModel)]="dateDefCheck" (change)="checkValue($event)" />Set Start-End Date</h6>
         </div>
         <div class="col-xs-2">
           <input type="text" class="form-control" name="StartDate" id="StartDate" type="date" [(ngModel)]="startDate" required [disabled]="dateDisabled"

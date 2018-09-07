@@ -26,7 +26,7 @@
         <span class="col-md-2"></span>
         <div class="col-sm-2">
           <h4>
-            <input type="checkbox" name="parentChk" (change)="checkValue($event)" (value)="parentChk" [(ngModel)]="parentChk" />Parent Task</h4>
+            <input type="checkbox" id="parentChk" name="parentChk" (change)="checkValue($event)" (value)="parentChk" [(ngModel)]="parentChk" />Parent Task</h4>
         </div>
       </div>
       <div class="form-group">
@@ -40,7 +40,7 @@
       <div class="form-group">
         <label class="control-label col-md-2" for="ParentTask">Parent Task:</label>
         <div class="col-md-5">
-          <select class="form-control" [disabled]="parentTaskChk" [(ngModel)]="selectedElement.ParentTaskId" name="ParentTask">
+          <select class="form-control" [disabled]="parentTaskChk" [(ngModel)]="selectedElement.ParentTaskId" name="ParentTask" id="ParentTask">
             <option *ngFor="let parentTask of parentTasks" [ngValue]="parentTask.ParentTaskId">
               {{parentTask.ParentTaskTitle}}
             </option>

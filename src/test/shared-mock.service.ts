@@ -10,22 +10,37 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class SharedMockService {
 
+  projectDO: ProjectDO[] = [{ ProjectId: 1, CompletedTasks: 0, StartDate: new Date('2018-08-12'), EndDate: new Date('2018-08-13'), ManagerId: 1, ManagerName: "Gamage", NoofTasks: 1, Priority: 12, ProjectTitle: 'Test' }];
+ 
+  userDO : UserDO[] = [{UserId:1,FirstName:"Rohith", LastName: "Sharma",EmployeeId:"212134", TaskId: null }];
+
   constructor() { }
 
-  addTask(task: TaskDO) {
-    return null;
+  addTask(task: TaskDO):Observable<any> {    
+    return Observable.create(data => {
+      data.next(task);
+      data.complete();
+    });
   }
 
-  addUser(user: UserDO) {
-    return null;
+  addUser(user: UserDO): Observable<UserDO> {
+    this.userDO.push(user);    
+    return Observable.create(data => {
+      data.next(this.userDO);
+      data.complete();
+    });
   }
 
   addParentTask(parent: ParentDO) {
     return null;
   }
 
-  addProject(project: ProjectDO) {
-    return null;
+  addProject(project: ProjectDO):Observable<ParentDO> {
+    this.projectDO.push(project);    
+    return Observable.create(data => {
+      data.next(this.projectDO);
+      data.complete();
+    });
   }
 
   getTask(id: number): Observable<TaskDO> {
@@ -59,7 +74,7 @@ export class SharedMockService {
       data.complete();
     });
   }
-
+  
   getTasks(): Observable<TaskDO[]> {
     const mockTasks: TaskDO[] = [
       { TaskId: 1, TaskTitle: 'Task 1', ProjectId: 2, UserId: 1, ParentTaskId: 1, ParentTaskTitle: null, Priority: 12, StartDate: new Date('2018-08-12'), EndDate: new Date('2018-08-13'), IsTaskEnded: false },
@@ -82,23 +97,23 @@ export class SharedMockService {
     });
   }
 
-  getAllUsers(): Observable<UserDO[]> {
-    const mockUsers: UserDO[] = [
-      { UserId: 1, FirstName: 'Sanju', LastName: 'Samson', EmployeeId: "123456", TaskId: null },
-      { UserId: 2, FirstName: 'Rahul', LastName: 'Dravid', EmployeeId: "234568", TaskId: null }
-    ];
+  getAllUsers(): Observable<UserDO[]> {    
     return Observable.create(data => {
-      data.next(mockUsers);
+      data.next(this.userDO);
       data.complete();
     });
   }
 
-  getAllProjects(): Observable<ProjectDO[]> {
-    const mockProjects: ProjectDO[] = [
-      { ProjectId: 1, CompletedTasks: 0, StartDate: new Date('2018-08-12'), EndDate: new Date('2018-08-13'), ManagerId: 1, ManagerName: "Game", NoofTasks: 1, Priority: 12, ProjectTitle: 'Test' }
-    ];
+  getAllProjects(): Observable<ProjectDO[]> {    
     return Observable.create(data => {
-      data.next(mockProjects);
+      data.next(this.projectDO);
+      data.complete();
+    });
+  }
+
+  getTasksByProjectId(projectId : number) : Observable<ProjectDO[]> {    
+    return Observable.create(data => {
+      data.next(this.projectDO);
       data.complete();
     });
   }
@@ -111,8 +126,11 @@ export class SharedMockService {
     return null;
   }
 
-  updateUser(id: number, user: UserDO) {
-    return null;
+  updateUser(id: number, user: UserDO): Observable<UserDO[]> {    
+    return Observable.create(data => {
+      data.next(this.userDO);
+      data.complete();
+    });
   }
 
   updateProject(id: number, project: ProjectDO) {

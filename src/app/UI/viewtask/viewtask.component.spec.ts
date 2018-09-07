@@ -36,32 +36,15 @@ describe('ViewComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should get all tasks', () => {
+  it('should get all projects', () => {
     expect(component).toBeTruthy();
-    //expect(component.filteredTasks.length).toBeGreaterThanOrEqual(0);
+    expect(component.filteredProjects.length).toBeGreaterThanOrEqual(1);
   });
 
-  it('should filter based on task name', () => {    
-    fixture.whenStable().then(() => {
-      let taskName = fixture.debugElement.query(By.css('#Task'));
-      taskName.nativeElement.value = 'Task 1';
-      taskName.nativeElement.dispatchEvent(new Event('input'));
-      taskName.nativeElement.dispatchEvent(new Event('blur'));            
-      //expect(component.filteredTasks.length).toBe(1);
-    });
-  });
-
-
-  it('should reload when filters are cleared', () => {    
-    fixture.whenStable().then(() => {
-      let taskName = fixture.debugElement.query(By.css('#Task'));
-      taskName.nativeElement.value = 'Task 1';
-      taskName.nativeElement.dispatchEvent(new Event('input'));
-      taskName.nativeElement.dispatchEvent(new Event('blur'));            
-      taskName.nativeElement.value = '';
-      taskName.nativeElement.dispatchEvent(new Event('input'));
-      taskName.nativeElement.dispatchEvent(new Event('blur'));            
-      //expect(component.filteredTasks.length).toBe(2);
-    });
+  it('should get all tasks in a project', () => {
+    expect(component).toBeTruthy();    
+    let projTitle = fixture.debugElement.query(By.css('#projectTitle'));
+    component.getTasks(1);
+    expect(component.filteredTasks.length).toBeGreaterThanOrEqual(1);
   });
 });

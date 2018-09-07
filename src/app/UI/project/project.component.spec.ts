@@ -40,4 +40,51 @@ describe('ProjectComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+ 
+  it('should add a project', () => {    
+    fixture.whenStable().then(()=>{
+      
+      let projectName = fixture.debugElement.query(By.css('#Project'));      
+      projectName.nativeElement.value = 'Cloud Transformation';
+      projectName.nativeElement.dispatchEvent(new Event('input'));
+
+      let setDateChk = fixture.debugElement.query(By.css('#DateDefCheck'));      
+      setDateChk.nativeElement.value = true;
+      setDateChk.nativeElement.dispatchEvent(new Event('input'));
+
+
+      let startDate = fixture.debugElement.query(By.css('#StartDate'));      
+      startDate.nativeElement.value = '2018-09-07';
+      startDate.nativeElement.dispatchEvent(new Event('input'));
+
+      let endDate = fixture.debugElement.query(By.css('#EndDate'));      
+      endDate.nativeElement.value = '2018-09-08';
+      endDate.nativeElement.dispatchEvent(new Event('input'));
+
+      let taskPriority = fixture.debugElement.query(By.css('#TaskPriority'));      
+      taskPriority.nativeElement.value = true;
+      taskPriority.nativeElement.dispatchEvent(new Event('input'));
+
+      let manager = fixture.debugElement.query(By.css('#Manager'));      
+      manager.nativeElement.value = 'Rahul';
+      manager.nativeElement.dispatchEvent(new Event('input'));
+
+      component.btnText ="Add Project";
+      
+      let addProjectBtn = fixture.debugElement.query(By.css('#btnAddProject'));
+      addProjectBtn.nativeElement.click();  
+      
+      expect(component.filteredProjects.length).toEqual(2);
+    });    
+  }); 
+
+  it('should fetch all users & projects', () => {
+    component.getAllProjects();
+    component.getAllUsers();
+    fixture.whenStable().then(()=>{
+      expect(component.filteredUsers).toBeTruthy();
+      expect(component.filteredProjects).toBeTruthy();
+    });
+  });
+
 });
