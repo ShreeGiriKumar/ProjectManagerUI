@@ -142,7 +142,6 @@ export class SharedMockService {
     return Observable.create(data => {
       data.next(this.taskDO);
       data.complete();
-    });
-    
+    });    
   }
 }
