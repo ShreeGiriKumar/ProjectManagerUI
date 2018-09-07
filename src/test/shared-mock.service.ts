@@ -14,6 +14,8 @@ export class SharedMockService {
  
   userDO : UserDO[] = [{UserId:1,FirstName:"Rohith", LastName: "Sharma",EmployeeId:"212134", TaskId: null }];
 
+  taskDO: TaskDO[] = [ { TaskId: 1, TaskTitle: 'Parent Task 1', ProjectId:1, ParentTaskId: 1, ParentTaskTitle:'Parent Task 1', Priority: 12, StartDate: null, EndDate: null, IsTaskEnded: false, UserId: 1 }];
+
   constructor() { }
 
   addTask(task: TaskDO):Observable<any> {    
@@ -119,7 +121,10 @@ export class SharedMockService {
   }
 
   updateTask(id: number, task: TaskDO) {
-    return null;
+    return Observable.create(data => {
+      data.next(this.userDO);
+      data.complete();
+    });
   }
 
   updateParentTask(id: number, parent: ParentDO) {
@@ -133,7 +138,11 @@ export class SharedMockService {
     });
   }
 
-  updateProject(id: number, project: ProjectDO) {
-    return null;
+  updateProject(id: number, project: ProjectDO):  Observable<TaskDO[]> {    
+    return Observable.create(data => {
+      data.next(this.taskDO);
+      data.complete();
+    });
+    
   }
 }

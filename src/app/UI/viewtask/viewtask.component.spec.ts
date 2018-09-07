@@ -47,4 +47,22 @@ describe('ViewComponent', () => {
     component.getTasks(1);
     expect(component.filteredTasks.length).toBeGreaterThanOrEqual(1);
   });
+
+  it('should get all tasks in a project after modal close', () => {
+    expect(component).toBeTruthy();    
+    let btn = fixture.debugElement.query(By.css('#btnProjSearchModal'));
+    btn.nativeElement.click();
+    let btnUsr = fixture.debugElement.query(By.css('.btn-success'));
+    btnUsr.nativeElement.click();
+    expect(component.filteredTasks.length).toBeGreaterThanOrEqual(1);
+  });
+
+  
+  it('should filter projects', () => {
+    let filterTxt = fixture.debugElement.query(By.css('#filterProject'));    
+    filterTxt.nativeElement.value = 'Test 1';
+    filterTxt.nativeElement.dispatchEvent(new Event('input'));
+    filterTxt.nativeElement.dispatchEvent(new Event('blur'));  
+    expect(component.filteredProjects.length).toBeGreaterThanOrEqual(0);          
+  });
 });
