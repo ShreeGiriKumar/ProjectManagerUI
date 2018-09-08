@@ -45,7 +45,7 @@
             required disabled>
         </div>
         <div class="col-md-1">
-          <button type="button" class="col-md-offset-1 btn btn-primary" data-toggle="modal" data-target="#myModal">Search</button>
+          <button type="button" id="btnUsrModal" class="col-md-offset-1 btn btn-primary" data-toggle="modal" data-target="#myModal">Search</button>
         </div>
       </div>
 
@@ -178,7 +178,7 @@
                   <td>{{user.FirstName}}</td>
                   <td>{{user.LastName}}</td>
                   <td>
-                    <button type="button" class="btn btn-success" data-dismiss="modal" (click)="selectedUser(user.UserId,user.FirstName,user.LastName)">Select</button>
+                    <button type="button" id="btnUsr" class="btn btn-success" data-dismiss="modal" (click)="selectedUser(user.UserId,user.FirstName,user.LastName)">Select</button>
                   </td>
                 </tr>
               </tbody>

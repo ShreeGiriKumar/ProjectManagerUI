@@ -131,7 +131,7 @@
                   <td>{{project.EndDate | date:'shortDate'}}</td>
                   <td>{{project.Priority}} </td>
                   <td>
-                    <button type="button" class="btn btn-success" data-dismiss="modal" (click)="selectedProject(project.ProjectId,project.ProjectTitle)">Select</button>
+                    <button type="button" id="btnProjSelect" class="btn btn-success" data-dismiss="modal" (click)="selectedProject(project.ProjectId,project.ProjectTitle)">Select</button>
                   </td>
                 </tr>
               </tbody>
@@ -190,7 +190,7 @@
                   <td>{{user.FirstName}}</td>
                   <td>{{user.LastName}}</td>
                   <td>
-                    <button type="button" class="btn btn-success" data-dismiss="modal" (click)="selectedUser(user.UserId,user.FirstName,user.LastName)">Select</button>
+                    <button type="button" id="btnUsr" class="btn btn-success" data-dismiss="modal" (click)="selectedUser(user.UserId,user.FirstName,user.LastName)">Select</button>
                   </td>
                 </tr>
               </tbody>

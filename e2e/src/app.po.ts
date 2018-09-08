@@ -6,28 +6,84 @@ export class AppPage {
     return browser.get('/');
   }
 
-  navigateToView() {
-    return browser.get('/View');
+  navigateToAddProj() {
+    return browser.get('/Project');
   }
-  getMenuFirstEleText() {
-    return element(by.css('app-menu a')).getText();
+
+  navigateToAddUser() {
+    return browser.get('/User');
   }
+
+  navigateToAddTask() {
+    return browser.get('/AddTask');
+  }
+
+  navigateToViewTask() {
+    return browser.get('/ViewTask');
+  }
+
+  fillAddProjectForm() {
+    element(by.id('Project')).sendKeys("Automated Project Creation").then(function () { });
+    element(by.css("input[type=checkbox]")).click();
+    var priority = element(by.id('TaskPriority'));
+    browser.actions().dragAndDrop(priority, { x: 50, y: 0 }).perform();
+    element(by.id('btnUsrModal')).click().then(() => {
+      browser.sleep(1000);
+      element(by.id('btnUsr')).click().then(() => {
+        browser.sleep(2000);
+      });
+    });
+  }
+
+  submitProjectForm() {
+    element(by.id('btnAddProject')).click().then(() => {
+      browser.sleep(2000);
+    });
+  }
+
+  fillAddUserForm() {
+    element(by.id('FirstName')).sendKeys("Automated User - First Name").then(function () { });
+    element(by.id('LastName')).sendKeys("Automated User - Last Name").then(function () { });
+    element(by.id('EmployeeID')).sendKeys("Automated User - Employee ID").then(function () { });
+    element(by.id('btnAddUser')).click().then(() => {
+      browser.sleep(1000);
+    });
+  }
+
 
   fillAddTaskForm() {
+    element(by.id('btnProjectSearch')).click().then(() => {
+      browser.sleep(1000);
+      element(by.id('btnProjSelect')).click().then(() => {
+        browser.sleep(1000);
+      });
+    });
     element(by.id('TaskName')).sendKeys("Automated Task").then(function () { });
-    var priority = element(by.id('TaskPriority'));
 
+    var priority = element(by.id('TaskPriority'));
     browser.actions().dragAndDrop(priority, { x: 50, y: 0 }).perform();
 
-    element(by.id('ParentTask')).sendKeys("Parent Automated Task").then(function () { });
-    element(by.id('StartDate')).sendKeys("18-08-2018").then(function () { });
-    element(by.id('EndDate')).sendKeys("19-08-2018").then(function () { });
+    element(by.cssContainingText('option', 'Prepare for Tournament')).click();
+
+    element(by.id('StartDate')).sendKeys("12-12-2018").then(function () { });
+    element(by.id('EndDate')).sendKeys("12-12-2018").then(function () { });
+
+    element(by.id('btnUserSearch')).click().then(() => {
+      browser.sleep(1000);
+      element(by.id('btnUsr')).click().then(() => {
+        browser.sleep(1000);
+      });
+    });
   }
 
   submitAddTask() {
     element(by.id('btnAddTask')).click().then(() => {
-      browser.sleep(2000);      
+      browser.sleep(2000);
     });
+  }
+
+  getMenuFirstEleText() {
+    return element(by.css('app-menu a')).getText();
   }
 
   getViewTaskTable() {
@@ -42,23 +98,23 @@ export class AppPage {
     return this.getFirstRow().all(by.tagName('td'));
   }
 
-  updateTaskData(){
+  updateTaskData() {
+
+    browser.sleep(3000);
     element(by.id('TaskName')).clear().then(function() {
-      element(by.id('TaskName')).sendKeys("Automated Task").then(function () { })
+    element(by.id('TaskName')).sendKeys("Automated Task Updated").then(function () { });
     });
 
     var priority = element(by.id('TaskPriority'));
-    browser.actions().dragAndDrop(priority, { x: 60, y: 0 }).perform();
+    browser.actions().dragAndDrop(priority, { x: 30, y: 0 }).perform();
 
-    element(by.id('ParentTask')).clear().then(function() {
-    element(by.id('ParentTask')).sendKeys("Parent Automated Task").then(function () { });
-    });
+    element(by.cssContainingText('option', 'Prepare for Tournament')).click();
 
-    element(by.id('StartDate')).sendKeys("18-08-2018").then(function () { });
-    element(by.id('EndDate')).sendKeys("19-08-2018").then(function () { });
+    element(by.id('StartDate')).sendKeys("14-12-2018").then(function () { });
+    element(by.id('EndDate')).sendKeys("15-12-2018").then(function () { });
 
     element(by.id('btnUpdate')).click().then(() => {
-      browser.sleep(7000);      
+      browser.sleep(2000);      
     });
   }
 }
