@@ -88,7 +88,7 @@
 
 <div *ngIf="filteredProjects == null || filteredProjects.length == 0">
   <h4>
-    <label class="label label-danger">No Projects found!</label>
+    <label class="label label-danger">No Projects Found!</label>
   </h4>
 </div>
 
@@ -154,11 +154,22 @@
           <div class="row"></div>
           <hr/>
           <div>
+            <div *ngIf="filteredUsers == null || filteredUsers.length == 0">
+              <h4>
+                <label class="label label-danger">No Users Found!</label>
+              </h4>
+            </div>
             <table class="table table-striped">
               <thead>
-                <td><label>Employee Id</label></td>
-                <td><label>First Name</label></td>
-                <td><label>Last Name</label></td>
+                <td>
+                  <label>Employee Id</label>
+                </td>
+                <td>
+                  <label>First Name</label>
+                </td>
+                <td>
+                  <label>Last Name</label>
+                </td>
                 <td></td>
               </thead>
               <tbody>

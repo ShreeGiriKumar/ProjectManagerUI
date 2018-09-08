@@ -26,7 +26,8 @@
         <span class="col-md-2"></span>
         <div class="col-sm-2">
           <h4>
-            <input type="checkbox" id="parentChk" name="parentChk" (change)="checkValue($event)" (value)="parentChk" [(ngModel)]="parentChk" />Parent Task</h4>
+            <input type="checkbox" id="parentChk" name="parentChk" (change)="checkValue($event)" (value)="parentChk" [(ngModel)]="parentChk"
+            />Parent Task</h4>
         </div>
       </div>
       <div class="form-group">
@@ -102,6 +103,11 @@
           <div class="row"></div>
           <hr/>
           <div>
+            <div *ngIf="filteredProjects == null || filteredProjects.length == 0">
+              <h4>
+                <label class="label label-danger">No Projects Found!</label>
+              </h4>
+            </div>
             <table class="table table-striped">
               <thead>
                 <td>
@@ -161,7 +167,7 @@
           <div>
             <div *ngIf="filteredUsers == null || filteredUsers.length == 0">
               <h4>
-                <label class="label label-danger">No available users for new tasks!</label>
+                <label class="label label-danger">Users unavailable for New Tasks!</label>
               </h4>
             </div>
             <table class="table table-striped">
