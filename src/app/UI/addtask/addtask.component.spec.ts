@@ -22,14 +22,14 @@ describe('AddComponent', () => {
       declarations: [
         AddComponent
       ],
-      providers: [        
-        { provide: SharedService, useClass: SharedMockService }
+      providers: [
+        { provide: SharedService, useClass: SharedMockService, DatePipe }
       ],
       imports: [
         FormsModule
       ]
     })
-      .compileComponents().then(()=>{
+      .compileComponents().then(() => {
         fixture = TestBed.createComponent(AddComponent);
         component = fixture.componentInstance;
       });
@@ -45,81 +45,87 @@ describe('AddComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should set slider span to chosen slidervalue',() => {    
+  it('should set slider span to chosen slidervalue', () => {
     expect(component.sliderVal).toBeUndefined();
     component.priority = 12;
     component.show_value(component.priority);
     expect(component.sliderVal).toBe(12);
   });
 
-  it('should reset the UI fields',() => {    
+  it('should reset the UI fields', () => {
     component.resetFields();
     expect(component.taskName).toBeNull();
     expect(component.projectTitle).toEqual('');
     expect(component.parentTask).toBeNull();
-    expect(component.startDate).toBe('2018-09-07');
-    expect(component.endDate).toBe('2018-09-08');
+    
+    let pipe = new DatePipe('en');
+    let tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    
+    expect(component.startDate).toBe(pipe.transform(new Date(),'yyyy-MM-dd'));
+    expect(component.endDate).toBe(pipe.transform(tomorrow, 'yyyy-MM-dd'));
+
   });
 
-  it('should add a new task',() => {
+  it('should add a new task', () => {
     fixture.detectChanges();
-    fixture.whenStable().then(()=>{
+    fixture.whenStable().then(() => {
 
-      let projectName = fixture.debugElement.query(By.css('#Project'));      
+      let projectName = fixture.debugElement.query(By.css('#Project'));
       projectName.nativeElement.value = 'Cloud Transformation';
       projectName.nativeElement.dispatchEvent(new Event('input'));
 
-      let taskName = fixture.debugElement.query(By.css('#TaskName'));      
+      let taskName = fixture.debugElement.query(By.css('#TaskName'));
       taskName.nativeElement.value = 'Task 1';
       taskName.nativeElement.dispatchEvent(new Event('input'));
 
-      let chkParent = fixture.debugElement.query(By.css('#parentChk'));      
+      let chkParent = fixture.debugElement.query(By.css('#parentChk'));
       chkParent.nativeElement.value = false;
       chkParent.nativeElement.dispatchEvent(new Event('input'));
 
-      let parentTask = fixture.debugElement.query(By.css('#ParentTask'));      
+      let parentTask = fixture.debugElement.query(By.css('#ParentTask'));
       parentTask.nativeElement.value = 'Parent Task 1';
       parentTask.nativeElement.dispatchEvent(new Event('select'));
 
-      let taskPriority = fixture.debugElement.query(By.css('#TaskPriority'));      
+      let taskPriority = fixture.debugElement.query(By.css('#TaskPriority'));
       taskPriority.nativeElement.value = 10;
       taskPriority.nativeElement.dispatchEvent(new Event('input'));
 
-      let startDate = fixture.debugElement.query(By.css('#StartDate'));      
+      let startDate = fixture.debugElement.query(By.css('#StartDate'));
       startDate.nativeElement.value = '2018-09-12';
       startDate.nativeElement.dispatchEvent(new Event('input'));
 
-      let endDate = fixture.debugElement.query(By.css('#EndDate'));      
+      let endDate = fixture.debugElement.query(By.css('#EndDate'));
       endDate.nativeElement.value = '2018-09-14';
       endDate.nativeElement.dispatchEvent(new Event('input'));
 
-      let user = fixture.debugElement.query(By.css('#User'));      
+      let user = fixture.debugElement.query(By.css('#User'));
       user.nativeElement.value = 'Shree';
       user.nativeElement.dispatchEvent(new Event('input'));
 
       let addTaskBtn = fixture.debugElement.query(By.css('#btnAddTask'));
-      addTaskBtn.nativeElement.click();  
+      addTaskBtn.nativeElement.click();
     });
-  });  
+  });
 
-  it('should add a new parent task',() => {
+  it('should add a new parent task', () => {
     fixture.detectChanges();
-    fixture.whenStable().then(()=>{
+    fixture.whenStable().then(() => {
 
-      let projectName = fixture.debugElement.query(By.css('#Project'));      
+      let projectName = fixture.debugElement.query(By.css('#Project'));
       projectName.nativeElement.value = 'Cloud Transformation';
       projectName.nativeElement.dispatchEvent(new Event('input'));
 
-      let taskName = fixture.debugElement.query(By.css('#TaskName'));      
+      let taskName = fixture.debugElement.query(By.css('#TaskName'));
       taskName.nativeElement.value = 'Parent Task 1';
       taskName.nativeElement.dispatchEvent(new Event('input'));
 
-      let parentTask = fixture.debugElement.query(By.css('#parentChk'));      
+      let parentTask = fixture.debugElement.query(By.css('#parentChk'));
       parentTask.nativeElement.value = true;
       parentTask.nativeElement.dispatchEvent(new Event('input'));
 
       let addTaskBtn = fixture.debugElement.query(By.css('#btnAddTask'));
-      addTaskBtn.nativeElement.click();  
+      addTaskBtn.nativeElement.click();
     });
-  }); 
+  });
 });

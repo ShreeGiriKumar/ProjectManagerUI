@@ -2,15 +2,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { SortingPipe } from './pipe/sorting.pipe';
+
 import { AppComponent } from './app.component';
 import { AddComponent } from './UI/addtask/addtask.component';
 import { MenuComponent } from './UI/menu/menu.component';
 import { ViewComponent } from './UI/viewtask/viewtask.component';
 import { EditComponent } from './UI/edittask/edittask.component';
-import { HttpClientModule } from '@angular/common/http';
 import { UserComponent } from './ui/user/user.component';
 import { ProjectComponent } from './ui/project/project.component';
-import { SortingPipe } from './pipe/sorting.pipe';
+
 
 
 const routes: Routes = [
