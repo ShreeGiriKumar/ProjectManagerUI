@@ -52,6 +52,7 @@ describe('AppComponent', () => {
     router = TestBed.get(Router);
     location = TestBed.get(Location);
     router.initialNavigation();
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000;
   }));
 
 
